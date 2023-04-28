@@ -9,8 +9,9 @@
     <div class="row">
         <!-- Blog entries-->
         <div class="col-lg-8 bg-white p-3">
-        <form action="{{ route('blog.store')}}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('blog.update' , $blog->id)}}" method="post" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <div class="col-lg-12 bg-white p-3">
                 @if ($errors->any())
                         <div class="alert alert-danger" role="alert">
@@ -19,25 +20,25 @@
                             @endforeach
                         </div>
                 @endif
-                <h1 class="bd-title" id="content">Create Blog</h1>
+                <h1 class="bd-title" id="content">Blog Edit Text <br> {{$blog->title}}</h1>
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Pictures</label>
                     <input class="form-control" type="file" id="formFile" name="formFile">
                 </div>
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="title" name="title" >
+                    <input type="text" class="form-control" id="title" name="title" value="{{$blog->title}}" >
                 </div>
                 <div class="mb-3">
                     <label for="Description" class="form-label">Description</label>
-                    <textarea class="form-control" id="Description" name="description" rows="13"></textarea>
+                    <textarea class="form-control" id="Description" name="description" rows="13">{{$blog->description}}</textarea>
                 </div>
                 <div class="mb-3">
                     <label for="datepicker" class="form-label">Publish Date</label>
-                    <input type="text" class="form-control" id="datepicker" name="publish_date"  width="276" />
+                    <input type="text" class="form-control" id="datepicker" name="publish_date" value="{{ \Carbon\Carbon::parse($blog->publish_date)->format('m/d/Y')}}" width="276" />
                 </div>
                 <div class="d-grid gap-2">
-                    <button class="btn btn-primary" type="submit">Publish</button>
+                    <button class="btn btn-primary" type="submit">Edit</button>
                 </div>
             </div>
         </form>

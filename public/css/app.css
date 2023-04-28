@@ -10768,3 +10768,22 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.gj-picker-bootstrap table tr td.today div {
+  color: red;
+}
+
+.text-pre-line {
+  white-space: pre-line;
+}
+
+.hero-blog-img {
+  height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.sub-blog-img {
+  height: 150px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
