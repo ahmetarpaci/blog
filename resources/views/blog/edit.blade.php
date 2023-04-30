@@ -37,6 +37,12 @@
                     <label for="datepicker" class="form-label">Publish Date</label>
                     <input type="text" class="form-control" id="datepicker" name="publish_date" value="{{ \Carbon\Carbon::parse($blog->publish_date)->format('m/d/Y')}}" width="276" />
                 </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="status"  @if ($blog->status == 1) checked @endif>
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Publish
+                    </label>
+                </div>
                 <div class="d-grid gap-2">
                     <button class="btn btn-primary" type="submit">Edit</button>
                 </div>

@@ -23,9 +23,9 @@ class BlogController extends Controller
         //
         if(auth()->user()->status == 2)
         {
-            $lists = Blog::orderBy('updated_at','desc')->get();
+            $lists = Blog::orderBy('created_at','asc')->get();
         }else{
-            $lists = Blog::where('user_id',auth()->user()->id)->orderBy('updated_at','desc')->get();
+            $lists = Blog::where('user_id',auth()->user()->id)->orderBy('created_at','asc')->get();
         }
         return view("blog.index")->with('blogs',$lists);
 
@@ -70,7 +70,7 @@ class BlogController extends Controller
         $request['slug'] = Str::slug($request->title);
         $request['publish_date'] = Carbon::parse($request->publish_date);
         $request['user_id'] = auth()->user()->id;
-
+        $request["status"] = $request->has('status');
 
         // $request['created_at'] = $request->datepicker;
         Blog::create($request->all());
@@ -148,7 +148,8 @@ class BlogController extends Controller
                 "description" => $request->description,
                 "slug" => Str::slug($request->title),
                 "publish_date" => Carbon::parse($request->publish_date),
-                "image" => ($request->formFile ? $imagechange : $dataBlog->image)
+                "image" => ($request->formFile ? $imagechange : $dataBlog->image),
+                "status" => $request->has('status'),
             ]
         );
 

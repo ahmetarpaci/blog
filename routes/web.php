@@ -19,6 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/userinfo', function(){
+    return view('userinfo');
+})->name('userinfo');
+
 
 Route::resource('/blog', BlogController::class);
 
@@ -27,3 +31,11 @@ Route::resource('/blog', BlogController::class);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/userlist', [App\Http\Controllers\AdminController::class, 'userlist'])->name('userlist');
+Route::post('/adminadd/{id}', [App\Http\Controllers\AdminController::class, 'adminadd'])->name('adminadd');
+Route::post('/useradd/{id}', [App\Http\Controllers\AdminController::class, 'useradd'])->name('useradd');
+Route::post('/activeuser/{id}', [App\Http\Controllers\AdminController::class, 'activeuser'])->name('activeuser');
+Route::post('/banuser/{id}', [App\Http\Controllers\AdminController::class, 'banuser'])->name('banuser');
+Route::post('/suspenduser/{id}', [App\Http\Controllers\AdminController::class, 'suspenduser'])->name('suspenduser');
+Route::post('/deleteuser/{id}', [App\Http\Controllers\AdminController::class, 'deleteuser'])->name('deleteuser');
+

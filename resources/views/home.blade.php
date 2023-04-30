@@ -6,7 +6,7 @@
         <!-- Blog entries-->
         <div class="col-lg-8">
             <!-- Featured blog post-->
-            @foreach ($blogs as $key => $blog )
+            @forelse ($blogs as $key => $blog )
             @if ($key == 0)
                 <div class="card mb-4">
                     @if ($blog->image)
@@ -32,7 +32,7 @@
                             @endif
                             <div class="card-body">
                                 <div class="small text-muted">{{ \Carbon\Carbon::parse($blog->created_at)->format('d M Y')}}</div>
-                                <h2 class="card-title">{{$blog->title}}e</h2>
+                                <h2 class="card-title">{{$blog->title}}</h2>
                                 <p class="card-text">{{Str::substr($blog->description, 0, 250) }}...</p>
                                 <a class="btn btn-primary" href="{{route('blog.show' , $blog->slug)}}">Read more →</a>
                             </div>
@@ -43,7 +43,16 @@
             @endif
 
             @endif
-            @endforeach
+            @empty
+            <div class="col-lg-4">
+                <!-- Side widget-->
+                <div class="card mb-4">
+                    <div class="card-header">The first to enter content</div>
+                    <div class="card-body"><a class="nav-link text-decoration-underline" href="{{ route('blog.create') }}">{{ __('Create Blog') }}</a></div>
+                </div>
+            </div>
+
+            @endforelse
         </div>
         <!-- Side widgets-->
         <div class="col-lg-4">
